@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatteryCompare - AA Batteries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .site-nav {
+            background-color: #eee;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .filter-bar {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .filter-bar label {
+            margin-right: 10px;
+        }
+        
+        .filter-bar select {
+            padding: 3px;
+            margin-right: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        th {
+            background-color: #eee;
+            padding: 8px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 3px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        
+        .pagination a.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        footer {
+            background-color: #eee;
+            padding: 10px 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        /* Checkbox styles */
+        .checkbox-group {
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .checkbox-options {
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .checkbox-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BatteryCompare</h1>
+    </header>
+    
+    <div class="site-nav">
+        <a href="index.html">Home</a> &gt; <a href="categories.html">Categories</a> &gt; <strong>AA Batteries</strong>
+    </div>
+    
+    <div class="container">
+        <h2>AA Batteries Price Comparison</h2>
+        
+        <div class="filter-bar">
+            <div class="checkbox-group">
+                <label>Data source</label>
+                <div class="checkbox-options">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.com" checked>
+                        <label for="amazon.com">amazon.com</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.co.uk" checked>
+                        <label for="amazon.co.uk">amazon.co.uk</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.es" checked>
+                        <label for="amazon.es">amazon.es</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.it" checked>
+                        <label for="amazon.it">amazon.it</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.fr" checked>
+                        <label for="amazon.fr">amazon.fr</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.ca" checked>
+                        <label for="amazon.ca">amazon.ca</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.com.au" checked>
+                        <label for="amazon.com.au">amazon.com.au</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="amazon.de" checked>
+                        <label for="amazon.de">amazon.de</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>Condition</label>
+                <div class="checkbox-options">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="new" checked>
+                        <label for="new">New</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="used" checked>
+                        <label for="used">Used</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>Price per</label>
+                <div class="checkbox-options">
+                    <div class="checkbox-item">
+                        <input type="radio" id="per-battery" name="price-per" checked>
+                        <label for="per-battery">Per battery</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="per-pack" name="price-per">
+                        <label for="per-pack">Per pack</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>Capacity</label>
+                <div class="checkbox-options">
+                    <div class="checkbox-item">
+                        <input type="radio" id="all-capacity" name="capacity" checked>
+                        <label for="all-capacity">All</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="cap-1500-2000" name="capacity">
+                        <label for="cap-1500-2000">1500-2000 mAh</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="cap-2000-2500" name="capacity">
+                        <label for="cap-2000-2500">2000-2500 mAh</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="cap-2500-plus" name="capacity">
+                        <label for="cap-2500-plus">2500+ mAh</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>Type</label>
+                <div class="checkbox-options">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="alkaline" checked>
+                        <label for="alkaline">Alkaline</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lithium" checked>
+                        <label for="lithium">Lithium</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="nimh" checked>
+                        <label for="nimh">NiMH (Rechargeable)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Data source</th>
+                    <th>Price per battery</th>
+                    <th>Price</th>
+                    <th>Capacity</th>
+                    <th>Chemistry</th>
+                    <th>Brand</th>
+                    <th>Package</th>
+                    <th>Condition</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$0.42</td>
+                    <td>$20.99</td>
+                    <td>2,800 mAh</td>
+                    <td>NiMH</td>
+                    <td>Energizer</td>
+                    <td>48-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Energizer Rechargeable AA Batteries, NiMH, 2800 mAh, Pre-Charged, 48 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$0.45</td>
+                    <td>$21.99</td>
+                    <td>2,600 mAh</td>
+                    <td>NiMH</td>
+                    <td>Panasonic</td>
+                    <td>48-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Panasonic Eneloop AA Pre-Charged Rechargeable Batteries, 2600 mAh, 48 Pack</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.co.uk</td>
+                    <td>$0.48</td>
+                    <td>$11.99</td>
+                    <td>2,100 mAh</td>
+                    <td>NiMH</td>
+                    <td>Amazon Basics</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Amazon Basics AA Rechargeable Batteries 2100mAh (24-Pack) Pre-charged</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.de</td>
+                    <td>$0.52</td>
+                    <td>$12.49</td>
+                    <td>2,900 mAh</td>
+                    <td>NiMH</td>
+                    <td>GP Batteries</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">GP ReCyko Pro AA Rechargeable Batteries, 2900mAh, 24 Pack, High Capacity</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.fr</td>
+                    <td>$0.55</td>
+                    <td>$32.99</td>
+                    <td>2,500 mAh</td>
+                    <td>NiMH</td>
+                    <td>Duracell</td>
+                    <td>60-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Duracell Ultra Rechargeable AA Batteries, 2500mAh, 60 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.es</td>
+                    <td>$0.58</td>
+                    <td>$13.99</td>
+                    <td>1,800 mAh</td>
+                    <td>NiMH</td>
+                    <td>Varta</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Varta Recharge Accu Power AA Rechargeable Batteries 1800 mAh NiMH, 24-Pack</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$0.63</td>
+                    <td>$24.99</td>
+                    <td>-</td>
+                    <td>Alkaline</td>
+                    <td>Duracell</td>
+                    <td>40-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Duracell Coppertop AA Alkaline Batteries, 40 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.ca</td>
+                    <td>$0.67</td>
+                    <td>$40.49</td>
+                    <td>3,000 mAh</td>
+                    <td>NiMH</td>
+                    <td>Panasonic</td>
+                    <td>60-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Panasonic Eneloop Pro AA High Capacity Rechargeable Batteries, 3000 mAh, 60 Pack</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.it</td>
+                    <td>$0.71</td>
+                    <td>$16.99</td>
+                    <td>-</td>
+                    <td>Lithium</td>
+                    <td>Energizer</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Energizer Ultimate Lithium AA Batteries, 24 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com.au</td>
+                    <td>$0.75</td>
+                    <td>$17.99</td>
+                    <td>-</td>
+                    <td>Alkaline</td>
+                    <td>Energizer</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Energizer Max AA Alkaline Batteries, 24 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$0.83</td>
+                    <td>$19.99</td>
+                    <td>-</td>
+                    <td>Lithium</td>
+                    <td>Energizer</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Energizer Ultimate Lithium AA Batteries, World's Longest-Lasting AA Battery, 24 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$0.87</td>
+                    <td>$20.99</td>
+                    <td>-</td>
+                    <td>Lithium</td>
+                    <td>Duracell</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Duracell Optimum AA Lithium Batteries, 24 Count</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.co.uk</td>
+                    <td>$0.92</td>
+                    <td>$22.19</td>
+                    <td>-</td>
+                    <td>Alkaline</td>
+                    <td>Duracell</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Duracell Plus AA Alkaline Batteries, 24 Pack</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.de</td>
+                    <td>$0.99</td>
+                    <td>$23.76</td>
+                    <td>-</td>
+                    <td>Lithium</td>
+                    <td>Varta</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Varta Professional Lithium AA Batteries, Long-lasting, 24-Pack</a></td>
+                </tr>
+                <tr>
+                    <td>amazon.com</td>
+                    <td>$1.04</td>
+                    <td>$24.99</td>
+                    <td>-</td>
+                    <td>Lithium</td>
+                    <td>Duracell</td>
+                    <td>24-pack</td>
+                    <td>New</td>
+                    <td><a href="#">Duracell Quantum AA Lithium Batteries with Power Boost, 24 Count</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">Next &raquo;</a>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 BatteryCompare | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="#">Affiliate Disclosure</a>
+    </footer>
+</body>
+</html>

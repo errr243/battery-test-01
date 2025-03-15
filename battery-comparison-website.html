@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatteryCompare - Find the Best Deals on Batteries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .hero {
+            background-color: #3498db;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: #1a252f;
+        }
+        
+        .categories {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 180px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-img img {
+            max-width: 100%;
+            max-height: 150px;
+        }
+        
+        .category-info {
+            padding: 1.5rem;
+        }
+        
+        .category-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured {
+            padding: 3rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .product-img img {
+            max-width: 100%;
+            max-height: 160px;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .product-rating {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            margin-top: auto;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .product-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .benefits {
+            padding: 3rem 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Battery<span>Compare</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Deals</a></li>
+                        <li><a href="#">Reviews</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Find the Best Battery Deals Online</h1>
+            <p>Compare prices from top retailers and save up to 40% on batteries for all your devices.</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for batteries (e.g., AA, 18650, CR2032)">
+                    <button>Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse Categories</h2>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="/api/placeholder/150/150" alt="AA Batteries">
+                    </div>
+                    <div class="category-info">
+                        <h3>AA Batteries</h3>
+                        <p>Standard alkaline and rechargeable AA batteries for everyday devices.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="/api/placeholder/150/150" alt="Lithium-Ion">
+                    </div>
+                    <div class="category-info">
+                        <h3>Lithium-Ion</h3>
+                        <p>High-performance batteries for cameras, laptops, and power tools.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="/api/placeholder/150/150" alt="Button Cell">
+                    </div>
+                    <div class="category-info">
+                        <h3>Button Cell</h3>
+                        <p>Small batteries for watches, calculators, and medical devices.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="/api/placeholder/150/150" alt="Rechargeable">
+                    </div>
+                    <div class="category-info">
+                        <h3>Rechargeable</h3>
+                        <p>Eco-friendly options for all your rechargeable battery needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured">
+        <div class="container">
+            <div class="section-title">
+                <h2>Today's Best Deals</h2>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/160/160" alt="Energizer AA Batteries">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Energizer AA Batteries (24-Pack)</div>
+                        <div class="product-price">$12.99 <span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$19.99</span></div>
+                        <div class="product-rating">★★★★★ (143 reviews)</div>
+                        <button class="product-button">View Deal</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/160/160" alt="Duracell CR2032">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Duracell CR2032 Lithium Coin Batteries (6-Pack)</div>
+                        <div class="product-price">$7.49 <span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$11.99</span></div>
+                        <div class="product-rating">★★★★☆ (87 reviews)</div>
+                        <button class="product-button">View Deal</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/160/160" alt="Sony 18650">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Sony 18650 VTC6 3000mAh Battery (4-Pack)</div>
+                        <div class="product-price">$24.95 <span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$32.99</span></div>
+                        <div class="product-rating">★★★★★ (211 reviews)</div>
+                        <button class="product-button">View Deal</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/160/160" alt="Panasonic Eneloop">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Panasonic Eneloop Pro AA Rechargeable (8-Pack)</div>
+                        <div class="product-price">$29.99 <span style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem;">$39.99</span></div>
+                        <div class="product-rating">★★★★★ (326 reviews)</div>
+                        <button class="product-button">View Deal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose BatteryCompare?</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Save Money</h3>
+                    <p>Our price comparison tool helps you find the lowest prices from trusted retailers.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏱️</div>
+                    <h3>Save Time</h3>
+                    <p>No need to browse multiple websites. Find all the best deals in one place.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⭐</div>
+                    <h3>Expert Reviews</h3>
+                    <p>Read real user reviews and get detailed information about battery performance.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔍</div>
+                    <h3>Smart Filters</h3>
+                    <p>Easily find the right battery for your device with our advanced search filters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">How We Compare</a></li>
+                        <li><a href="#">Our Partners</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">AA & AAA Batteries</a></li>
+                        <li><a href="#">Lithium-Ion</a></li>
+                        <li><a href="#">Button Cell</a></li>
+                        <li><a href="#">Rechargeable</a></li>
+                        <li><a href="#">Special Purpose</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help & Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BatteryCompare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
